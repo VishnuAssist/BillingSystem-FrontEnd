@@ -25,8 +25,10 @@ import {
   Receipt,
 } from "@mui/icons-material";
 import PetsIcon from '@mui/icons-material/Pets';
-import { useAppSelector } from "../hooks/redux";
+import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import { useNavigate, useLocation } from "react-router-dom";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { logout } from "../store/slices/loginSlice";
 
 const SIDEBAR_WIDTH = 80;
 const EXPANDED_SIDEBAR_WIDTH = 200;
@@ -37,7 +39,7 @@ const navigationSections = [
     header: "Menu",
 
     items: [
-      { icon: Home, path: "/", label: "Dashboard" },
+      { icon: Home, path: "/dashboard", label: "Dashboard" },
       { icon: LocalDrink, path: "/milk-entry", label: "Milk Entry" },
       { icon: PersonAdd, path: "/add-provider", label: "Add Provider" },
       { icon: ShoppingCart, path: "/sale", label: "Sale" },
@@ -63,13 +65,17 @@ interface SidebarProps {
 
 export default function Sidebar({ expanded }: SidebarProps) {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const location = useLocation();
   const { sidebarOpen } = useAppSelector((state) => state.ui);
 
   const handleNavigation = (path: string) => {
     navigate(path);
   };
-
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/")
+  };
   const sidebarContent = (
     <Box
       sx={{
@@ -270,6 +276,68 @@ export default function Sidebar({ expanded }: SidebarProps) {
           </Box>
         ))}
       </Box>
+
+      {/* ✅ LOGOUT SECTION AT THE BOTTOM */}
+<Box
+  sx={{
+    width: "100%",
+    mt: "auto", // push to bottom
+    pb: 2,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: expanded ? "flex-start" : "center",
+  }}
+>
+  {expanded ? (
+    <ListItemButton
+      onClick={handleLogout} // 🔁 Replace with your logout function
+      sx={{
+        borderRadius: 2,
+        py: 1.5,
+        pl: 3,
+        width: "100%",
+        transition: "all 0.2s ease",
+        "&:hover": { bgcolor: "action.hover" },
+      }}
+    >
+      <ListItemIcon sx={{ minWidth: 0, mr: 2, color: "error.main" }}>
+        <LogoutIcon fontSize="medium" /> {/* or use LogoutIcon */}
+      </ListItemIcon>
+      <ListItemText
+        primary="Logout"
+        primaryTypographyProps={{
+          fontSize: "0.875rem",
+          fontWeight: 600,
+          color: "error.main",
+        }}
+      />
+    </ListItemButton>
+  ) : (
+    <Tooltip title="Logout" placement="right" arrow>
+      <ListItemButton
+        onClick={handleLogout}
+        sx={{
+          borderRadius: 2,
+          p: 1.5,
+          justifyContent: "center",
+          "&:hover": { bgcolor: "action.hover" },
+        }}
+      >
+        <ListItemIcon
+          sx={{
+            minWidth: 0,
+            color: "error.main",
+            justifyContent: "center",
+            display: "flex",
+          }}
+        >
+          <LogoutIcon fontSize="medium"  /> {/* or use LogoutIcon */}
+        </ListItemIcon>
+      </ListItemButton>
+    </Tooltip>
+  )}
+</Box>
+
     </Box>
   );
 
