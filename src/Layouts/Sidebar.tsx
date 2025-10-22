@@ -211,6 +211,9 @@ export default function Sidebar({ expanded }: SidebarProps) {
                           //   bgcolor: isActive ? "primary.dark" : "action.hover",
                           // },
                           transition: "all 0.2s ease",
+                          "&:hover": {
+                            bgcolor: "transparent", // Remove hover background
+                          },
                         }}
                       >
                         <ListItemIcon
@@ -249,7 +252,7 @@ export default function Sidebar({ expanded }: SidebarProps) {
                             "&:hover": {
                               bgcolor: isActive
                                 ? "primary.dark"
-                                : "action.hover",
+                                : "transparent",
                             },
                             transition: "all 0.2s ease",
                           }}
@@ -297,7 +300,7 @@ export default function Sidebar({ expanded }: SidebarProps) {
         pl: 3,
         width: "100%",
         transition: "all 0.2s ease",
-        "&:hover": { bgcolor: "action.hover" },
+        "&:hover": { bgcolor: "transparent" },
       }}
     >
       <ListItemIcon sx={{ minWidth: 0, mr: 2, color: "error.main" }}>

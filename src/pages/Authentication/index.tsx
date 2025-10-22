@@ -13,6 +13,8 @@ import { useNavigate } from "react-router";
 import { useMuiTheme } from "../../contexts/ThemeContext"; // ✅ use your MUI theme
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { loginFailed, setCredentials } from "../../store/slices/loginSlice";
+import Lottie from "lottie-react";
+import cowAnimation from "../../../public/CowDrinkMilk.json";
 
 const LoginPage: React.FC = () => {
     const dispatch = useAppDispatch();
@@ -22,7 +24,7 @@ const { isAuthenticated,  } = useAppSelector((state) => state.login);
 
   const [username, setUsername] = useState("sita");
   const [password, setPassword] = useState("sita@123");
-
+const [showAnimation, setShowAnimation] = useState(false);
   const theme = useMuiTheme(); // ✅ get theme colors
 
 
@@ -34,16 +36,21 @@ const { isAuthenticated,  } = useAppSelector((state) => state.login);
 
     if (farmer) {
       dispatch(setCredentials({ username: farmer.userName, }));
+      setShowAnimation(true);
     } else {
       dispatch(loginFailed("Invalid username or password"));
     }
   };
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate("/dashboard");
+useEffect(() => {
+    if (isAuthenticated && showAnimation) {
+      // Delay navigation to show animation for 2 seconds
+      const timer = setTimeout(() => {
+        navigate("/dashboard");
+      }, 7000); // Adjust duration as needed
+      return () => clearTimeout(timer); // Cleanup timer
     }
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, showAnimation, navigate]);
 
  
   // ✅ Create gradient background from theme colors
@@ -66,6 +73,20 @@ const { isAuthenticated,  } = useAppSelector((state) => state.login);
       }}
     >
       
+      {showAnimation ? (
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          sx={{ height: 300 }}
+        >
+          <Lottie
+            animationData={cowAnimation}
+            loop={true}
+            style={{ width: 1200, height: 1200 }}
+          />
+        </Box>
+      ) : (
         <Paper
           elevation={3}
           sx={{
@@ -116,7 +137,7 @@ const { isAuthenticated,  } = useAppSelector((state) => state.login);
           >
             Login
           </Button>
-        </Paper>
+        </Paper>)}
     
     </Box>
   );

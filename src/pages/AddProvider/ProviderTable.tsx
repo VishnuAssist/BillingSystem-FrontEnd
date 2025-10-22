@@ -89,7 +89,7 @@ const ProviderTable = () => {
 
   return (
     <>
-    <TableContainer>
+    {/* <TableContainer> */}
       <Table >
         <TableHead sx={{bgcolor:"background.paper"}}>
           <TableRow>
@@ -144,7 +144,7 @@ const ProviderTable = () => {
           </AnimatePresence>
         </TableBody>
       </Table>
-      </TableContainer>
+      {/* </TableContainer> */}
       <TablePagination
         rowsPerPageOptions={[5, 10, 25]}
         component="div"
