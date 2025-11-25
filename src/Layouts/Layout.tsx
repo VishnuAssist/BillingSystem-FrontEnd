@@ -10,7 +10,7 @@ interface LayoutProps {
 }
 
 export default function Layout({ children, onSearch }: LayoutProps) {
-  const [sidebarExpanded, setSidebarExpanded] = useState(false);
+  const [sidebarExpanded, setSidebarExpanded] = useState(true);
 
   const handleExpandSidebar = () => {
     setSidebarExpanded(!sidebarExpanded);

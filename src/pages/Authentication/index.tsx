@@ -14,7 +14,7 @@ import { useMuiTheme } from "../../contexts/ThemeContext"; // ✅ use your MUI t
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { loginFailed, setCredentials } from "../../store/slices/loginSlice";
 import Lottie from "lottie-react";
-import cowAnimation from "../../../public/CowDrinkMilk.json";
+import foodAnimation from "../../../public/FoodAnimation.json";
 
 const LoginPage: React.FC = () => {
     const dispatch = useAppDispatch();
@@ -81,9 +81,9 @@ useEffect(() => {
           sx={{ height: 300 }}
         >
           <Lottie
-            animationData={cowAnimation}
+            animationData={foodAnimation}
             loop={true}
-            style={{ width: 1200, height: 1200 }}
+            style={{ width: 500, height: 500 }}
           />
         </Box>
       ) : (

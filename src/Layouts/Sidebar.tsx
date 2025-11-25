@@ -15,16 +15,17 @@ import {
 } from "@mui/material";
 import {
   Home,
-  LocalDrink,
-  PersonAdd,
-  ShoppingCart,
   Inventory,
   Payment,
-  Assessment,
+  
   Info,
   Receipt,
 } from "@mui/icons-material";
-import PetsIcon from '@mui/icons-material/Pets';
+import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
+import AddBusinessIcon from '@mui/icons-material/AddBusiness';
+import SummarizeIcon from '@mui/icons-material/Summarize';
+import FastfoodIcon from '@mui/icons-material/Fastfood';
+
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import { useNavigate, useLocation } from "react-router-dom";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -40,14 +41,14 @@ const navigationSections = [
 
     items: [
       { icon: Home, path: "/dashboard", label: "Dashboard" },
-      { icon: LocalDrink, path: "/milk-entry", label: "Milk Entry" },
-      { icon: PersonAdd, path: "/add-provider", label: "Add Provider" },
-      { icon: ShoppingCart, path: "/sale", label: "Sale" },
       { icon: Inventory, path: "/stock", label: "Stock" },
       { icon: Payment, path: "/payment", label: "Payment" },
-      { icon: Assessment, path: "/summary", label: "Summary" },
       { icon: Info, path: "/info", label: "Info" },
       { icon: Receipt, path: "/expense", label: "Expense" },
+
+      { icon: RestaurantMenuIcon, path: "/menu", label: "Menu" },
+      { icon: AddBusinessIcon, path: "/menuCart", label: "MenuCart" },
+      { icon: SummarizeIcon, path: "/reports", label: "Reports" },
     ],
   },
   // {
@@ -115,7 +116,7 @@ export default function Sidebar({ expanded }: SidebarProps) {
     }}
   >
     <IconButton sx={{ color: "primary.main", p: 1 }}>
-      <PetsIcon fontSize="large"  />
+      <FastfoodIcon fontSize="large"  />
     </IconButton>
 
     {expanded && (
@@ -124,7 +125,7 @@ export default function Sidebar({ expanded }: SidebarProps) {
           variant="subtitle1"
           sx={{ fontWeight: 700, fontSize: 19 }}
         >
-          Rukku
+          VS Foods
         </Typography>
  
       </Box>
